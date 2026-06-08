@@ -1,0 +1,29 @@
+/* responsive_productos.css — Breakpoints del módulo Productos
+   Sidebar / topbar / content-area están en css/base.css */
+
+@media (max-width: 1366px) {
+  .content-area   { padding: 22px 22px 40px; }
+  .producto-nombre { max-width: 160px; }
+}
+@media (max-width: 1024px) {
+  .col-codigo, .th-codigo { display: none; }
+  .col-compra, .th-compra { display: none; }
+}
+@media (max-width: 767px) {
+  .topbar-breadcrumb  { display: none; }
+  .table-wrapper      { overflow-x: auto; }
+  .productos-table    { min-width: 600px; }
+  .col-categoria, .th-categoria,
+  .col-codigo,    .th-codigo,
+  .col-compra,    .th-compra    { display: none; }
+  .filters-bar    { flex-direction: column; align-items: stretch; }
+  .search-wrapper { max-width: 100%; }
+  .results-count  { margin-left: 0; }
+  .modal          { max-width: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .modal-overlay  { align-items: flex-end; padding: 0; }
+  .form-row       { grid-template-columns: 1fr; }
+  .form-row .span-2 { grid-column: span 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal, .modal-overlay, .sidebar { transition: none; }
+}

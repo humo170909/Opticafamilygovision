@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Usuarios · Óptica Family GO Vision</title>
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/admin/main_admin.css" />
+  <link rel="stylesheet" href="../../css/admin/layout_admin.css" />
+  <link rel="stylesheet" href="../../css/admin/components_admin.css" />
+  <link rel="stylesheet" href="../../css/admin/responsive_admin.css" />
+</head>
+<body class="page-hidden">
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">Óptica Family <span> GO Vision</span></div>
+      <div class="logo-sub">Sistema de Gestión</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Principal</div>
+      <a href="../dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <div class="nav-section-title">Inventario</div>
+      <a href="../inventario/categorias.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span>Tipos de Producto</span>
+      </a>
+      <a href="../inventario/productos.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><path d="M11 12h2"/></svg>
+        <span>Productos</span>
+      </a>
+      <a href="../inventario/index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>Stock</span>
+      </a>
+      <div class="nav-section-title">Ventas</div>
+      <a href="../ventas/pos.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span>Punto de Venta</span>
+      </a>
+      <a href="../ventas/historial.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Historial</span>
+      </a>
+      <a href="../ventas/reportes.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+        <span>Reportes</span>
+      </a>
+      <div class="nav-section-title">Pacientes</div>
+      <a href="../pacientes/index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span>Pacientes</span>
+      </a>
+      <a href="../pacientes/historial.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Historial Clínico</span>
+      </a>
+      <a href="../pacientes/citas.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Citas</span>
+      </a>
+      <div class="nav-section-title">Administración</div>
+      <a href="usuarios.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Usuarios</span>
+      </a>
+      <a href="configuracion.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Configuración</span>
+      </a>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar-initials">--</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebar-user-name">Cargando...</div>
+        <div class="user-role" id="sidebar-user-role">--</div>
+      </div>
+      <button class="btn-logout" id="btn-logout" title="Cerrar sesión">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="main-content">
+    <header class="topbar">
+      <button class="btn-topbar-action btn-menu" id="btn-menu">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <nav class="topbar-breadcrumb">
+        <a href="../dashboard.html">Dashboard</a>
+        <span class="sep">›</span><span>Administración</span>
+        <span class="sep">›</span><span class="current">Usuarios</span>
+      </nav>
+      <div class="topbar-actions">
+        <span class="topbar-date" id="topbar-date"></span>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Usuarios del sistema</h1>
+          <p class="page-subtitle" id="subtitle-contador">Cargando…</p>
+        </div>
+        <button class="btn-primary" id="btn-nuevo-usuario">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nuevo usuario
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <div><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total usuarios</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(46,158,107,.09);border-color:rgba(46,158,107,.2);color:#2e9e6b;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div><div class="stat-value" id="stat-activos">—</div><div class="stat-label">Activos</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(192,37,58,.09);border-color:rgba(192,37,58,.2);color:#c0253a;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div><div class="stat-value" id="stat-inactivos">—</div><div class="stat-label">Inactivos</div></div>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="toolbar">
+        <div class="search-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="search-usuarios" class="search-input" placeholder="Buscar por nombre, email…" />
+        </div>
+        <select id="filtro-rol" class="form-select" style="width:auto;">
+          <option value="">Todos los roles</option>
+          <option value="admin">Admin</option>
+          <option value="vendedor">Vendedor</option>
+        </select>
+        <select id="filtro-estado" class="form-select" style="width:auto;">
+          <option value="">Todos</option>
+          <option value="activo">Activos</option>
+          <option value="inactivo">Inactivos</option>
+        </select>
+      </div>
+
+      <!-- Tabla -->
+      <div class="table-wrapper">
+        <table aria-label="Lista de usuarios">
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Estado</th>
+              <th>Creado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-usuarios">
+            <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--c-ink-muted);">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Modal nuevo/editar usuario -->
+<div class="modal-overlay" id="modal-usuario" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title" id="modal-usuario-title">Nuevo Usuario</h2>
+        <p class="modal-subtitle">Completa los datos del usuario</p>
+      </div>
+      <button class="modal-close" id="btn-close-modal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="error-message" id="modal-error" hidden></div>
+    <form id="form-usuario" novalidate>
+      <div class="modal-body">
+        <input type="hidden" id="usuario-id" />
+        <div class="form-group">
+          <label class="form-label" for="u-nombre">Nombre completo <span class="required">*</span></label>
+          <input type="text" id="u-nombre" class="form-input" required maxlength="100" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="u-email">Email <span class="required">*</span></label>
+          <input type="email" id="u-email" class="form-input" required />
+        </div>
+        <div id="u-password-group" class="form-group">
+          <label class="form-label" for="u-password">Contraseña <span class="required" id="pwd-required">*</span></label>
+          <input type="password" id="u-password" class="form-input" minlength="8" />
+          <span class="form-hint" id="pwd-hint">Mínimo 8 caracteres</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="u-rol">Rol <span class="required">*</span></label>
+          <select id="u-rol" class="form-select" required>
+            <option value="vendedor">Vendedor</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="toggle-wrapper">
+            <input type="checkbox" id="u-activo" class="toggle-input" checked />
+            <div class="toggle-switch"></div>
+            <span class="form-label" style="margin-bottom:0;">Usuario activo</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-cancelar-modal">Cancelar</button>
+        <button type="submit" class="btn-primary" id="btn-guardar-usuario">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span id="btn-guardar-texto">Crear usuario</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../../js/modules/admin/usuarios.js" type="module"></script>
+</body>
+</html>

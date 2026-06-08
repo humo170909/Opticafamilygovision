@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión · Óptica Family GO Vision</title>
+  <meta name="description" content="Sistema de Gestión Óptica Family GO Vision — Acceso seguro para profesionales de la visión." />
+
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/login/main.css" />
+  <link rel="stylesheet" href="../../css/login/layout.css" />
+  <link rel="stylesheet" href="../../css/login/components.css" />
+  <link rel="stylesheet" href="../../css/login/responsive.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       AUTH SHELL — Light, frameless layout over background image
+       Left:  Brand info (bottom-left)
+       Right: Login form (center-right)
+  ============================================================ -->
+  <main class="auth-shell">
+
+    <!-- ============== BRAND SECTION (bottom-left) ============== -->
+    <section class="brand-block" aria-labelledby="brand-title">
+      <p class="brand-eyebrow">Sistema de Gestión</p>
+
+      <h1 id="brand-title" class="brand-title">
+        <span> Óptica Family</span>
+        <span> GO Vision</span>
+      </h1>
+
+      <p class="brand-tagline">Tu visión es nuestra prioridad</p>
+      <p class="brand-desc">Gestión profesional de clientes y medidas visuales.</p>
+    </section>
+
+    <!-- ============== LOGIN SECTION (center-right) ============== -->
+    <section class="login-block" aria-labelledby="login-title">
+      <div class="login-card">
+        <header class="login-header">
+          <h2 id="login-title" class="login-title">Iniciar Sesión</h2>
+          <p class="login-subtitle">Acceso para personal Autorizado</p>
+        </header>
+
+        <!-- Error placeholder (kept for existing functionality) -->
+        <div class="error-message" role="alert" hidden></div>
+
+        <form class="form" id="login-form" autocomplete="on" novalidate>
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="nombre@opticalima.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-primary">Ingresar</button>
+        </form>
+
+        <footer class="login-foot">
+          <span> Creado por VJ Nexus "Transformamos empresas con tecnología" </span>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+  <script src="../../js/modules/auth/login.js" type="module"></script>
+</body>
+</html>

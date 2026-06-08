@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <rect width="200" height="60" rx="8" fill="#0f2a44"/>
+  <circle cx="34" cy="30" r="12" stroke="#4a90d9" stroke-width="2.5" fill="none"/>
+  <circle cx="66" cy="30" r="12" stroke="#4a90d9" stroke-width="2.5" fill="none"/>
+  <line x1="46" y1="30" x2="54" y2="30" stroke="#4a90d9" stroke-width="2.5"/>
+  <line x1="10" y1="30" x2="22" y2="30" stroke="#4a90d9" stroke-width="2.5"/>
+  <line x1="78" y1="30" x2="92" y2="30" stroke="#4a90d9" stroke-width="2.5"/>
+  <text x="100" y="24" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#ffffff" letter-spacing="-0.3">OPTICA</text>
+  <text x="100" y="40" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#4a90d9" letter-spacing="2">LIMA</text>
+</svg>

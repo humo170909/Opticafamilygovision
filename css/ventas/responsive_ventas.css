@@ -1,0 +1,23 @@
+/* responsive_ventas.css — Breakpoints del módulo Ventas
+   Sidebar / topbar / content-area están en css/base.css */
+
+@media (max-width: 1200px) {
+  .kpi-grid   { grid-template-columns: repeat(2, 1fr); }
+  .pos-layout { grid-template-columns: 1fr 320px; }
+}
+@media (max-width: 1024px) {
+  .pos-layout { grid-template-columns: 1fr; height: auto; }
+  .pos-cart   { max-height: 420px; }
+}
+@media (max-width: 768px) {
+  .kpi-grid      { grid-template-columns: 1fr 1fr; }
+  .product-grid  { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  table          { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+@media (max-width: 480px) {
+  .kpi-grid        { grid-template-columns: 1fr; }
+  .toolbar         { flex-direction: column; }
+  .search-wrapper  { min-width: 100%; }
+  .modal           { max-width: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .modal-overlay   { align-items: flex-end; padding: 0; }
+}

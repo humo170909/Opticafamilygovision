@@ -1,0 +1,5 @@
+/* layout_historial.css — Grids exclusivos del módulo Historial Clínico
+   El shell (sidebar, topbar, content-area) está en css/base.css */
+
+/* Dos columnas: panel de búsqueda + ficha del paciente */
+.hist-grid { display: grid; grid-template-columns: 300px 1fr; gap: 18px; align-items: start; }

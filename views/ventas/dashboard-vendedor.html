@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Dashboard · Óptica Family GO Vision</title>
+  <script>try{var r=sessionStorage.getItem('rol');if(r==='admin'||r==='vendedor')document.documentElement.classList.add('role-'+r);}catch(e){}</script>
+  <link rel="stylesheet" href="../../css/base.css"/>
+  <link rel="stylesheet" href="../../css/ventas/main_ventas.css"/>
+  <link rel="stylesheet" href="../../css/ventas/layout_ventas.css"/>
+  <link rel="stylesheet" href="../../css/ventas/components_ventas.css"/>
+  <link rel="stylesheet" href="../../css/ventas/responsive_ventas.css"/>
+  <style>
+    /* ── Layout dashboard-vendedor ── */
+    .dv-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .dv-kpi {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .dv-kpi-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--c-ink-muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .dv-kpi-value {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--c-ink);
+      line-height: 1;
+    }
+    .dv-kpi-sub {
+      font-size: 0.76rem;
+      color: var(--c-ink-muted);
+    }
+    .dv-kpi.accent { border-left: 3px solid var(--c-accent); }
+    .dv-kpi.success { border-left: 3px solid var(--c-success); }
+    .dv-kpi.info    { border-left: 3px solid var(--c-info); }
+
+    .dv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 900px) {
+      .dv-grid { grid-template-columns: 1fr; }
+    }
+
+    .dv-card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .dv-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px 12px;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .dv-card-title {
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--c-ink);
+    }
+    .dv-card-body { padding: 0; }
+
+    /* apt items — citas */
+    .apt-list { padding: 0 18px; }
+    .apt-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .apt-item:last-child { border-bottom: none; }
+    .apt-time {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--c-accent);
+      min-width: 36px;
+    }
+    .apt-info { flex: 1; min-width: 0; }
+    .apt-name {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--c-ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .apt-reason { font-size: 0.74rem; color: var(--c-ink-muted); }
+
+    /* ventas table */
+    .dv-table { width: 100%; border-collapse: collapse; }
+    .dv-table th {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--c-ink-muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      padding: 10px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .dv-table td { padding: 10px 18px; font-size: 0.83rem; color: var(--c-ink); }
+    .dv-table tr + tr td { border-top: 1px solid var(--c-border); }
+    .td-money { text-align: right; font-weight: 600; font-family: var(--font-display); }
+    .td-sub { font-size: 0.72rem; color: var(--c-ink-muted); }
+
+    /* stock items */
+    .stock-list { padding: 0 18px; }
+    .stock-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .stock-item:last-child { border-bottom: none; }
+    .stock-ico {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: var(--c-danger-bg);
+      color: var(--c-danger);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .stock-info { flex: 1; min-width: 0; }
+    .stock-name { font-size: 0.82rem; font-weight: 600; color: var(--c-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .stock-detail { font-size: 0.72rem; color: var(--c-ink-muted); }
+    .stock-qty {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--c-danger);
+    }
+  </style>
+</head>
+<body class="page-hidden">
+<div class="app-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">Óptica Family <span>GO Vision</span></div>
+      <div class="logo-sub">Sistema de Gestión</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Ventas</div>
+      <a href="pos.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span>Punto de Venta</span>
+      </a>
+
+      <div class="nav-section-title">Pacientes</div>
+      <a href="../pacientes/index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Pacientes</span>
+      </a>
+      <a href="../pacientes/historial.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Historial Clínico</span>
+      </a>
+      <a href="../pacientes/citas.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Citas</span>
+      </a>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">--</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebar-user-name">Cargando…</div>
+        <div class="user-role" id="sidebar-user-role">Vendedor</div>
+      </div>
+      <button class="btn-logout" id="btn-logout" title="Cerrar sesión">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ── MAIN ── -->
+  <div class="main-content">
+    <header class="topbar">
+      <button class="btn-icon btn-menu" id="btn-menu" aria-label="Menú">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topbar-title"><strong>Mi Dashboard</strong></div>
+      <div class="topbar-actions">
+        <span class="topbar-date" id="topbar-date"></span>
+      </div>
+    </header>
+
+    <main class="content-area">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Mi resumen de hoy</h1>
+          <p class="page-subtitle" id="header-date">Cargando…</p>
+        </div>
+        <a href="pos.html" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Nueva Venta
+        </a>
+      </div>
+
+      <!-- KPIs -->
+      <div class="dv-kpi-grid">
+        <div class="dv-kpi accent">
+          <div class="dv-kpi-label">Ventas hoy</div>
+          <div class="dv-kpi-value" id="kpi-count-hoy">0</div>
+          <div class="dv-kpi-sub">transacciones</div>
+        </div>
+        <div class="dv-kpi success">
+          <div class="dv-kpi-label">Total facturado</div>
+          <div class="dv-kpi-value" id="kpi-total-hoy">S/ 0.00</div>
+          <div class="dv-kpi-sub">hoy</div>
+        </div>
+        <div class="dv-kpi info">
+          <div class="dv-kpi-label">Citas hoy</div>
+          <div class="dv-kpi-value" id="kpi-citas-hoy">0</div>
+          <div class="dv-kpi-sub">agendadas</div>
+        </div>
+      </div>
+
+      <!-- Grid principal -->
+      <div class="dv-grid">
+
+        <!-- Citas de hoy -->
+        <div class="dv-card">
+          <div class="dv-card-header">
+            <div class="dv-card-title">Citas de hoy</div>
+            <a href="../pacientes/citas.html" style="font-size:.75rem;color:var(--c-accent);">Ver todas</a>
+          </div>
+          <div class="dv-card-body">
+            <div class="apt-list" id="citas-hoy">
+              <p style="text-align:center;padding:20px;color:var(--c-ink-muted);font-size:.82rem;">Cargando…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mis últimas ventas -->
+        <div class="dv-card">
+          <div class="dv-card-header">
+            <div class="dv-card-title">Mis últimas ventas</div>
+            <a href="pos.html" style="font-size:.75rem;color:var(--c-accent);">Nueva venta</a>
+          </div>
+          <div class="dv-card-body">
+            <table class="dv-table">
+              <thead>
+                <tr>
+                  <th>Paciente</th>
+                  <th>Método</th>
+                  <th style="text-align:right;">Total</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-mis-ventas">
+                <tr><td colspan="3" style="text-align:center;padding:20px;color:var(--c-ink-muted);font-size:.82rem;">Cargando…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Alertas de stock -->
+        <div class="dv-card">
+          <div class="dv-card-header">
+            <div class="dv-card-title">Alertas de stock</div>
+          </div>
+          <div class="dv-card-body">
+            <div class="stock-list" id="alertas-stock">
+              <p style="text-align:center;padding:20px;color:var(--c-ink-muted);font-size:.82rem;">Cargando…</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div><!-- /main-content -->
+</div><!-- /app-layout -->
+
+<div id="toast-container"></div>
+
+<script type="module" src="../../js/modules/ventas/dashboard-vendedor.js"></script>
+</body>
+</html>

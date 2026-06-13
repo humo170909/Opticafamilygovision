@@ -1,7 +1,0 @@
-/* layout_ventas.css — Layout exclusivo del módulo Ventas
-   El shell (sidebar, topbar, content-area) está en css/base.css */
-
-/* ── POS: split de dos columnas catálogo / carrito ── */
-.pos-layout  { display: grid; grid-template-columns: 1fr 360px; gap: 20px; height: calc(100vh - var(--topbar-h) - 52px); }
-.pos-catalog { display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
-.pos-cart    { display: flex; flex-direction: column; background: var(--c-surface-solid); border-radius: var(--radius-lg); border: 1px solid var(--c-border); overflow: hidden; }

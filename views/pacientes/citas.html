@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title> Citas · Óptica Family GO Vision </title>
+  <script>try{var r=sessionStorage.getItem('rol');if(r==='admin'||r==='vendedor')document.documentElement.classList.add('role-'+r);}catch(e){}</script>
+  <link rel="stylesheet" href="../../css/base.css"/>
+  <link rel="stylesheet" href="../../css/citas/main_citas.css"/>
+  <link rel="stylesheet" href="../../css/citas/layout_citas.css"/>
+  <link rel="stylesheet" href="../../css/citas/components_citas.css"/>
+  <link rel="stylesheet" href="../../css/citas/responsive_citas.css"/>
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text"> Óptica Family <span> GO Vision </span></div>
+      <div class="logo-sub">Sistema de Gestión</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title vendor-only">Principal</div>
+      <a href="../ventas/dashboard-vendedor.html" class="nav-item vendor-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+
+      <div class="nav-section-title vendor-only">Mi Jornada</div>
+      <a href="../ventas/asistencia.html" class="nav-item vendor-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Asistencia</span>
+      </a>
+
+      <div class="nav-section-title admin-only">Principal</div>
+      <a href="../dashboard.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+
+      <div class="nav-section-title admin-only">Inventario</div>
+      <a href="../inventario/categorias.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span>Tipos de Producto</span>
+      </a>
+      <a href="../inventario/productos.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><path d="M11 12h2"/></svg>
+        <span>Productos</span>
+      </a>
+      <a href="../inventario/index.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <span>Stock</span>
+        <span class="nav-badge">3</span>
+      </a>
+
+      <div class="nav-section-title">Ventas</div>
+      <a href="../ventas/pos.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span>Punto de Venta</span>
+      </a>
+      <a href="../ventas/historial.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>Historial Ventas</span>
+      </a>
+      <a href="../ventas/reportes.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+        <span>Reportes</span>
+      </a>
+
+      <div class="nav-section-title">Pacientes</div>
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Pacientes</span>
+      </a>
+      <a href="historial.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Historial Clínico</span>
+      </a>
+      <a href="citas.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Citas</span>
+      </a>
+
+      <div class="nav-section-title admin-only">Administración</div>
+      <a href="../admin/usuarios.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 100 6 3 3 0 000-6z"/><path d="M6 8a2 2 0 00-2 2v3h2v7a1 1 0 001 1h6a1 1 0 001-1v-7h2v-3a2 2 0 00-2-2H6z"/></svg>
+        <span>Usuarios</span>
+      </a>
+      <a href="../admin/configuracion.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Configuración</span>
+      </a>
+      <a href="../admin/asistencia.html" class="nav-item admin-only">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Asistencia</span>
+      </a>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">--</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebar-user-name">Cargando…</div>
+        <div class="user-role" id="sidebar-user-role">--</div>
+      </div>
+      <button class="btn-logout" id="btn-logout" title="Cerrar sesión">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ── MAIN ── -->
+  <div class="main-content">
+    <header class="topbar">
+      <button class="btn-icon btn-menu" id="btn-menu" aria-label="Menú">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topbar-title"><strong>Citas</strong> · Agenda de pacientes</div>
+      <div class="topbar-actions">
+        <span class="topbar-date" id="topbar-date"></span>
+        <button class="btn-icon" title="Notificaciones">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="content-area">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Citas</h1>
+          <p class="page-subtitle">Agenda y seguimiento de citas</p>
+        </div>
+        <button class="btn-primary" id="btn-nueva-cita">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nueva Cita
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-ico a">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-citas-hoy">0</div>
+            <div class="stat-label">Citas hoy</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ico s">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-confirmadas">0</div>
+            <div class="stat-label">Confirmadas</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ico w">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-pendientes">0</div>
+            <div class="stat-label">Pendientes</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ico i">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-value" id="stat-mes">0</div>
+            <div class="stat-label">Este mes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid principal: calendario + lista + detalle -->
+      <div class="citas-grid">
+
+        <!-- Columna izquierda: calendario + lista del día -->
+        <div style="display:flex;flex-direction:column;gap:16px;">
+
+          <!-- Calendario -->
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Calendario</div></div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <button class="cal-nav-btn" id="cal-prev">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <span class="cal-mes" id="cal-mes"></span>
+                <button class="cal-nav-btn" id="cal-next">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Días de la semana -->
+              <div class="cal-grid">
+                <div class="cal-dow">Lu</div>
+                <div class="cal-dow">Ma</div>
+                <div class="cal-dow">Mi</div>
+                <div class="cal-dow">Ju</div>
+                <div class="cal-dow">Vi</div>
+                <div class="cal-dow">Sá</div>
+                <div class="cal-dow">Do</div>
+              </div>
+              <!-- Días generados por JS -->
+              <div class="cal-grid" id="cal-dias"></div>
+            </div>
+          </div>
+
+          <!-- Lista de citas del día -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Citas del día</div>
+                <div class="card-subtitle" id="lista-subtitle">Hoy</div>
+              </div>
+              <span style="font-family:var(--ci-font-d);font-size:.78rem;font-weight:700;color:var(--ci-accent);">8 citas</span>
+            </div>
+            <div class="card-body" style="padding:14px 16px;">
+              <div class="cita-list" id="cita-list">
+                <p style="text-align:center;padding:20px;color:var(--ci-ink-muted);font-size:.82rem;">Cargando citas…</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: detalle de la cita seleccionada -->
+        <div class="card" style="position:sticky;top:76px;">
+          <div class="card-header">
+            <div><div class="card-title">Detalle de cita</div><div class="card-subtitle">Selecciona una cita</div></div>
+          </div>
+          <div class="card-body">
+
+            <!-- Estado vacío -->
+            <div class="detalle-empty" id="detalle-empty">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <p>Haz clic en una cita<br>para ver el detalle</p>
+            </div>
+
+            <!-- Detalle — oculto hasta seleccionar -->
+            <div id="detalle-content" style="display:none;">
+              <div class="detalle-paciente">
+                <div class="det-avatar">MG</div>
+                <div>
+                  <div class="det-nombre">María García López</div>
+                  <div class="det-meta">DNI 45231876 · 987 654 321</div>
+                </div>
+              </div>
+
+              <div class="det-grid">
+                <div class="det-item">
+                  <span class="det-label">Fecha</span>
+                  <span class="det-valor">05 jun 2025</span>
+                </div>
+                <div class="det-item">
+                  <span class="det-label">Hora</span>
+                  <span class="det-valor">9:00 AM</span>
+                </div>
+                <div class="det-item">
+                  <span class="det-label">Tipo</span>
+                  <span class="det-valor">Control de vista</span>
+                </div>
+                <div class="det-item">
+                  <span class="det-label">Estado</span>
+                  <span class="det-valor"><span class="badge bs">Confirmada</span></span>
+                </div>
+              </div>
+
+              <div class="det-nota">
+                <div class="det-nota-label">Notas</div>
+                Paciente solicita revisión de graduación anual. Viene con montura propia para ajuste.
+              </div>
+
+              <div class="det-acciones">
+                <a href="historial.html?id=1" class="btn-secondary" style="font-size:.82rem;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Ver historial
+                </a>
+                <button class="btn-primary" style="font-size:.82rem;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  Marcar completada
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /citas-grid -->
+    </main>
+  </div>
+</div>
+
+<!-- ── MODAL NUEVA CITA ── -->
+<div class="modal-overlay" id="modal-cita">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Nueva Cita</span>
+      <button class="btn-close" id="btn-close-modal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <form id="form-cita">
+      <div class="modal-body">
+        <div class="form-group full">
+          <label class="form-label" for="select-paciente-cita">Paciente *</label>
+          <select id="select-paciente-cita" class="form-select">
+            <option value="">Seleccionar paciente…</option>
+          </select>
+        </div>
+        <div id="nuevo-paciente-fields" style="display:none;" class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="input-nuevo-nombres">Nombres *</label>
+            <input type="text" id="input-nuevo-nombres" class="form-input" placeholder="Ej: María"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-nuevo-apellidos">Apellidos *</label>
+            <input type="text" id="input-nuevo-apellidos" class="form-input" placeholder="Ej: García López"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cita-fecha">Fecha *</label>
+            <input type="date" id="cita-fecha" class="form-input" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cita-hora">Hora *</label>
+            <input type="time" id="cita-hora" class="form-input" min="08:00" max="20:00" required/>
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="cita-tipo">Tipo de cita *</label>
+          <select id="cita-tipo" class="form-select">
+            <option>Control de vista</option>
+            <option>Examen completo</option>
+            <option>Primera consulta</option>
+            <option>Recogida de lentes</option>
+            <option>Consulta rápida</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="cita-notas">Notas (opcional)</label>
+          <textarea id="cita-notas" class="form-textarea" placeholder="Observaciones o instrucciones previas…"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-cancelar-modal">Cancelar</button>
+        <button type="submit" class="btn-primary">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Agendar Cita
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../../js/modules/pacientes/citas.js" type="module"></script>
+</body>
+</html>

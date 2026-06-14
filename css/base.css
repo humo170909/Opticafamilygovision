@@ -1,0 +1,720 @@
+/* ============================================================
+   css/base.css — Variables canónicas, reset, utilidades y layout compartido
+   Importar como PRIMER CSS en todos los archivos HTML del proyecto
+   ============================================================ */
+
+/* ── Fuentes ── */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* ── Paleta base ── */
+  --c-bg:            #eaf3fb;
+  --c-bg-fallback:   #eaf3fb;
+  --c-surface:       rgba(255,255,255,0.72);
+  --c-surface-solid: #ffffff;
+  --c-border:        rgba(74,144,217,0.18);
+  --c-border-soft:   rgba(74,144,217,0.10);
+
+  /* ── Texto ── */
+  --c-ink:       #0f2a44;
+  --c-ink-soft:  #355472;
+  --c-ink-muted: #6b829a;
+  --c-ink-faint: #93a8bd;
+
+  /* ── Blancos (login) ── */
+  --c-white:    #ffffff;
+  --c-white-80: rgba(255,255,255,0.80);
+  --c-white-60: rgba(255,255,255,0.60);
+  --c-white-40: rgba(255,255,255,0.40);
+
+  /* ── Acento ── */
+  --c-accent:        #4a90d9;
+  --c-accent-strong: #2f74bd;
+  --c-accent-soft:   #cfe2f4;
+  --c-accent-glow:   rgba(74,144,217,0.28);
+  --c-accent-bg:     rgba(74,144,217,0.08);
+
+  /* ── Inputs ── */
+  --c-input-bg:           rgba(255,255,255,0.70);
+  --c-input-bg-focus:     rgba(255,255,255,0.95);
+  --c-input-border:       rgba(74,144,217,0.28);
+  --c-input-border-focus: var(--c-accent);
+  --c-input-text:         var(--c-ink);
+  --c-input-placeholder:  #93a8bd;
+
+  /* ── Semánticos ── */
+  --c-success: #2e9e6b;  --c-success-bg: rgba(46,158,107,0.09);
+  --c-warning: #d97a0f;  --c-warning-bg: rgba(217,122,15,0.09);
+  --c-danger:  #c0253a;  --c-danger-bg:  rgba(192,37,58,0.09);
+  --c-info:    #1e7bb8;  --c-info-bg:    rgba(30,123,184,0.09);
+
+  /* ── Error (alias login) ── */
+  --c-error-bg:     var(--c-danger-bg);
+  --c-error-border: rgba(192,37,58,0.28);
+  --c-error-text:   #b3253a;
+
+  /* ── Sidebar ── */
+  --c-sidebar-bg:          #0f2a44;
+  --c-sidebar-text:        rgba(255,255,255,0.70);
+  --c-sidebar-hover:       rgba(74,144,217,0.16);
+  --c-sidebar-active-bg:   rgba(74,144,217,0.22);
+  --c-sidebar-active-text: #ffffff;
+  --c-sidebar-active-line: #4a90d9;
+  --c-sidebar:             #0f2a44;
+
+  /* ── Tipografía ── */
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-body:    'Inter',  system-ui, sans-serif;
+  /* Alias cortos — mantener para compatibilidad con componentes existentes */
+  --font-d: var(--font-display);
+  --font-b: var(--font-body);
+
+  /* ── Sombras ── */
+  --shadow-xs: 0 1px 3px  rgba(15,42,68,0.07);
+  --shadow-sm: 0 2px 8px  rgba(15,42,68,0.09);
+  --shadow-md: 0 4px 20px rgba(15,42,68,0.11);
+  --shadow-lg: 0 8px 32px rgba(15,42,68,0.13);
+
+  /* ── Radios ── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  /* Alias cortos */
+  --r-sm: var(--radius-sm);
+  --r-md: var(--radius-md);
+  --r-lg: var(--radius-lg);
+
+  /* ── Layout ── */
+  --sidebar-width:     252px;
+  --sidebar-collapsed: 68px;
+  --topbar-h:          60px;
+  --pos-offset:        52px;   /* POS height offset: content-area padding-top + visual buffer */
+  /* Alias cortos */
+  --sidebar-w: var(--sidebar-width);
+  --sidebar-c: var(--sidebar-collapsed);
+
+  /* ── Alias módulo Citas (--ci-*) ── */
+  --ci-bg:            var(--c-bg);
+  --ci-surface:       var(--c-surface-solid);
+  --ci-border:        rgba(74,144,217,0.13);
+  --ci-ink:           var(--c-ink);
+  --ci-ink-soft:      var(--c-ink-soft);
+  --ci-ink-muted:     var(--c-ink-muted);
+  --ci-ink-faint:     var(--c-ink-faint);
+  --ci-accent:        var(--c-accent);
+  --ci-accent-strong: var(--c-accent-strong);
+  --ci-accent-soft:   var(--c-accent-soft);
+  --ci-accent-bg:     var(--c-accent-bg);
+  --ci-accent-glow:   var(--c-accent-glow);
+  --ci-success:       var(--c-success);   --ci-success-bg: var(--c-success-bg);
+  --ci-warning:       var(--c-warning);   --ci-warning-bg: var(--c-warning-bg);
+  --ci-danger:        var(--c-danger);    --ci-danger-bg:  var(--c-danger-bg);
+  --ci-info:          var(--c-info);      --ci-info-bg:    var(--c-info-bg);
+  --ci-sidebar:       var(--c-sidebar-bg);
+  --ci-sidebar-text:  var(--c-sidebar-text);
+  --ci-sidebar-hover: var(--c-sidebar-hover);
+  --ci-shadow-xs:     var(--shadow-xs);
+  --ci-shadow-sm:     var(--shadow-sm);
+  --ci-shadow-md:     var(--shadow-md);
+  --ci-font-d:        var(--font-display);
+  --ci-font-b:        var(--font-body);
+  --ci-r-sm:          var(--radius-sm);
+  --ci-r-md:          var(--radius-md);
+  --ci-r-lg:          var(--radius-lg);
+  --ci-sidebar-w:     var(--sidebar-width);
+  --ci-sidebar-c:     var(--sidebar-collapsed);
+  --ci-topbar-h:      var(--topbar-h);
+
+  /* ── Alias módulo Pacientes (--p-*) ── */
+  --p-bg:            var(--c-bg);
+  --p-surface:       var(--c-surface-solid);
+  --p-border:        rgba(74,144,217,0.13);
+  --p-ink:           var(--c-ink);
+  --p-ink-soft:      var(--c-ink-soft);
+  --p-ink-muted:     var(--c-ink-muted);
+  --p-ink-faint:     var(--c-ink-faint);
+  --p-accent:        var(--c-accent);
+  --p-accent-strong: var(--c-accent-strong);
+  --p-accent-soft:   var(--c-accent-soft);
+  --p-accent-bg:     var(--c-accent-bg);
+  --p-accent-glow:   var(--c-accent-glow);
+  --p-success:       var(--c-success);   --p-success-bg: var(--c-success-bg);
+  --p-warning:       var(--c-warning);   --p-warning-bg: var(--c-warning-bg);
+  --p-danger:        var(--c-danger);    --p-danger-bg:  var(--c-danger-bg);
+  --p-info:          var(--c-info);      --p-info-bg:    var(--c-info-bg);
+  --p-sidebar:       var(--c-sidebar-bg);
+  --p-sidebar-text:  var(--c-sidebar-text);
+  --p-sidebar-hover: var(--c-sidebar-hover);
+  --p-shadow-xs:     var(--shadow-xs);
+  --p-shadow-sm:     var(--shadow-sm);
+  --p-shadow-md:     var(--shadow-md);
+  --p-font-d:        var(--font-display);
+  --p-font-b:        var(--font-body);
+  --p-r-sm:          var(--radius-sm);
+  --p-r-md:          var(--radius-md);
+  --p-r-lg:          var(--radius-lg);
+  --p-sidebar-w:     var(--sidebar-width);
+  --p-sidebar-c:     var(--sidebar-collapsed);
+  --p-topbar-h:      var(--topbar-h);
+
+  /* ── Alias módulo Historial (--h-*) ── */
+  --h-bg:            var(--c-bg);
+  --h-surface:       var(--c-surface-solid);
+  --h-border:        rgba(74,144,217,0.13);
+  --h-ink:           var(--c-ink);
+  --h-ink-soft:      var(--c-ink-soft);
+  --h-ink-muted:     var(--c-ink-muted);
+  --h-ink-faint:     var(--c-ink-faint);
+  --h-accent:        var(--c-accent);
+  --h-accent-strong: var(--c-accent-strong);
+  --h-accent-soft:   var(--c-accent-soft);
+  --h-accent-bg:     var(--c-accent-bg);
+  --h-accent-glow:   var(--c-accent-glow);
+  --h-success:       var(--c-success);   --h-success-bg: var(--c-success-bg);
+  --h-warning:       var(--c-warning);   --h-warning-bg: var(--c-warning-bg);
+  --h-danger:        var(--c-danger);    --h-danger-bg:  var(--c-danger-bg);
+  --h-info:          var(--c-info);      --h-info-bg:    var(--c-info-bg);
+  --h-sidebar:       var(--c-sidebar-bg);
+  --h-sidebar-text:  var(--c-sidebar-text);
+  --h-sidebar-hover: var(--c-sidebar-hover);
+  --h-shadow-xs:     var(--shadow-xs);
+  --h-shadow-sm:     var(--shadow-sm);
+  --h-shadow-md:     var(--shadow-md);
+  --h-font-d:        var(--font-display);
+  --h-font-b:        var(--font-body);
+  --h-r-sm:          var(--radius-sm);
+  --h-r-md:          var(--radius-md);
+  --h-r-lg:          var(--radius-lg);
+  --h-sidebar-w:     var(--sidebar-width);
+  --h-sidebar-c:     var(--sidebar-collapsed);
+  --h-topbar-h:      var(--topbar-h);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow-x: hidden; }
+body {
+  font-family: var(--font-body);
+  background: var(--c-bg);
+  color: var(--c-ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+button { font: inherit; cursor: pointer; border: none; background: none; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+input, select, textarea, button { outline: none; }
+input, select, textarea { font-family: inherit; font-size: inherit; }
+svg { display: block; flex-shrink: 0; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--c-accent-soft); border-radius: 10px; }
+
+/* ── Utilidades ── */
+.hidden      { display: none !important; }
+.sr-only     { position: absolute; width: 1px; height: 1px; padding: 0;
+               margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.flex        { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+
+/* ── Control de roles — seguridad visual ─────────────────────────────────────
+   html:not(.role-admin) .admin-only: oculta items de admin antes del primer
+   paint. Un <script> inline en el <head> de cada página protegida lee el rol
+   de sessionStorage y añade html.role-admin o html.role-vendedor de forma
+   síncrona, antes de que el browser evalúe estilos. initUI() confirma el rol
+   vía Supabase y actualiza sessionStorage + el atributo class.
+
+   body.page-hidden: páginas exclusivas de un rol inician invisibles.
+   Si el usuario equivocado llega por URL directa, checkAuth redirige mientras
+   el body sigue oculto — nunca ve el contenido incorrecto.
+   ───────────────────────────────────────────────────────────────────────── */
+html:not(.role-admin)    .admin-only  { display: none !important; }
+html:not(.role-vendedor) .vendor-only { display: none !important; }
+body.page-hidden                      { visibility: hidden; }
+
+/* ── Skeleton loaders ── */
+.skeleton-line,
+.skeleton-block {
+  background: linear-gradient(
+    90deg,
+    rgba(74,144,217,0.08) 25%,
+    rgba(74,144,217,0.18) 50%,
+    rgba(74,144,217,0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-sm);
+}
+.skeleton-line  { height: 14px; margin-bottom: 6px; }
+.skeleton-block { height: 48px; }
+
+/* ── Animaciones ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================================================================
+   LAYOUT COMPARTIDO — App shell idéntico en todas las páginas
+   Fuente de verdad única. Los layout_*.css solo definen grids
+   propios de cada módulo.
+   ================================================================ */
+
+/* ── Wrapper principal ── */
+.app-layout { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;               /* fija la altura al viewport para que sidebar-user quede siempre al fondo */
+  background: var(--c-sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 100;
+  transition: width 0.3s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+}
+
+.sidebar-logo {
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.22rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.logo-text span { color: var(--c-accent); }
+.logo-sub {
+  font-size: 0.72rem;
+  color: var(--c-sidebar-text);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* min-height:0 es imprescindible para que el flex child pueda
+   encogerse por debajo de su contenido y el scroll funcione */
+.sidebar-nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 0;
+  scrollbar-width: none;
+}
+.sidebar-nav::-webkit-scrollbar { display: none; }
+
+.nav-section-title {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  padding: 14px 20px 6px;
+  white-space: nowrap;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 16px 9px 18px;
+  margin: 1px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--c-sidebar-text);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.nav-item:hover { background: var(--c-sidebar-hover); color: #fff; }
+.nav-item.active {
+  background: var(--c-sidebar-active-bg);
+  color: var(--c-sidebar-active-text);
+  border-left: 2px solid var(--c-sidebar-active-line);
+  padding-left: 16px;
+}
+.nav-item svg { width: 17px; height: 17px; flex-shrink: 0; opacity: 0.72; transition: opacity 0.18s; }
+.nav-item:hover svg, .nav-item.active svg { opacity: 1; }
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--c-accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 20px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Bloque de usuario — siempre pegado al fondo gracias a flex-shrink:0
+   y a que .sidebar-nav tiene min-height:0 + overflow-y:auto */
+.sidebar-user {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.user-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--c-accent-bg);
+  border: 1.5px solid var(--c-accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 0.78rem;
+  color: var(--c-accent);
+  flex-shrink: 0;
+}
+.user-info { flex: 1; min-width: 0; }
+.user-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 600;
+  color: #fff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.user-role { font-size: 0.72rem; color: var(--c-sidebar-text); white-space: nowrap; }
+.btn-logout {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.40);
+  transition: background 0.18s, color 0.18s;
+  flex-shrink: 0;
+}
+.btn-logout:hover { background: rgba(192,37,58,0.22); color: #ff6b7a; }
+
+/* Overlay para mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(15,42,68,0.45);
+  z-index: 99;
+  backdrop-filter: blur(2px);
+}
+.sidebar-overlay.active { display: block; }
+
+/* ── Main content ── */
+.main-content {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: margin-left 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Topbar ── */
+.topbar {
+  height: var(--topbar-h);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--c-border-soft);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--c-ink-soft);
+}
+.topbar-title strong { color: var(--c-ink); font-weight: 700; }
+.topbar-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.topbar-date {
+  font-size: 0.78rem;
+  color: var(--c-ink-muted);
+  font-weight: 500;
+  padding: 5px 10px;
+  background: var(--c-accent-bg);
+  border-radius: 20px;
+  border: 1px solid var(--c-border);
+  white-space: nowrap;
+}
+.topbar-breadcrumb {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.82rem; color: var(--c-ink-muted);
+}
+.topbar-breadcrumb a { color: var(--c-ink-muted); transition: color 0.18s; }
+.topbar-breadcrumb a:hover { color: var(--c-accent); }
+.topbar-breadcrumb .sep { opacity: 0.4; }
+.topbar-breadcrumb .current { color: var(--c-ink); font-weight: 600; }
+
+/* ── Botones de topbar (ícono cuadrado) ── */
+.btn-icon,
+.btn-topbar-action {
+  width: 34px; height: 34px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border);
+  background: var(--c-surface-solid);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-ink-muted);
+  transition: all 0.18s;
+}
+.btn-icon:hover,
+.btn-topbar-action:hover {
+  background: var(--c-accent-bg);
+  border-color: var(--c-accent-soft);
+  color: var(--c-accent-strong);
+}
+/* Oculto por defecto; visible solo en mobile */
+.btn-menu { display: none; }
+
+/* ── Content area ── */
+.content-area { padding: 26px 28px 48px; flex: 1; min-width: 0; }
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--c-ink);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.page-subtitle { font-size: 0.83rem; color: var(--c-ink-muted); margin-top: 3px; }
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+  margin-bottom: 14px;
+}
+
+/* ── Botones de acción compartidos ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  background: var(--c-accent); color: #fff;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display); font-weight: 600; font-size: 0.85rem;
+  border: 1px solid var(--c-accent-strong);
+  box-shadow: 0 3px 12px -3px var(--c-accent-glow);
+  transition: background 0.18s, transform 0.14s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: var(--c-accent-strong); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: var(--c-surface-solid); color: var(--c-ink-soft);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display); font-weight: 600; font-size: 0.85rem;
+  border: 1px solid var(--c-border);
+  transition: background 0.16s, border-color 0.16s;
+  white-space: nowrap;
+}
+.btn-secondary:hover { background: var(--c-accent-bg); border-color: var(--c-accent-soft); color: var(--c-accent-strong); }
+
+/* ================================================================
+   RESPONSIVE COMPARTIDO — sidebar + topbar + content
+   Los layout_*.css solo agregan breakpoints de sus grids propios.
+   ================================================================ */
+
+/* Laptop: reduce padding de content-area ligeramente */
+@media (max-width: 1366px) {
+  :root { --pos-offset: 44px; }
+  .content-area { padding: 22px 22px 40px; }
+}
+
+/* Tablet: sidebar colapsa a íconos */
+@media (max-width: 1024px) {
+  .sidebar { width: var(--sidebar-collapsed); }
+  .logo-text, .logo-sub,
+  .nav-section-title,
+  .nav-item span,
+  .nav-badge,
+  .user-info { display: none; }
+  .nav-item { justify-content: center; padding: 10px; margin: 1px 6px; }
+  .nav-item.active { border-left: none; border-bottom: 2px solid var(--c-accent); }
+  .sidebar-user { justify-content: center; padding: 12px 0; }
+  .main-content { margin-left: var(--sidebar-collapsed); }
+}
+
+/* Mobile: sidebar como drawer deslizante */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width);
+    height: 100vh;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar.open .logo-text,
+  .sidebar.open .logo-sub,
+  .sidebar.open .nav-section-title,
+  .sidebar.open .nav-item span,
+  .sidebar.open .user-info { display: block; }
+  .sidebar.open .nav-badge { display: inline-flex; }
+  .sidebar.open .nav-item { justify-content: flex-start; padding: 9px 16px 9px 18px; }
+  .sidebar.open .nav-item.active { border-left: 2px solid var(--c-accent); border-bottom: none; }
+  .sidebar.open .sidebar-user { justify-content: flex-start; padding: 14px 16px; }
+  .sidebar-overlay.active { display: block; }
+  .main-content { margin-left: 0; }
+  .btn-menu { display: flex !important; }
+  .content-area { padding: 16px 14px 40px; }
+  .topbar { padding: 0 16px; }
+  .topbar-date { display: none; }
+  .topbar-breadcrumb { display: none; }
+  .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .content-area { padding: 12px 10px 32px; }
+  .page-title { font-size: 1.25rem; }
+}
+
+/* ============================================================
+   MODO OSCURO — sobreescribe variables del :root
+   ============================================================ */
+[data-theme="dark"] {
+  --c-bg:            #0d1b2a;
+  --c-bg-fallback:   #0d1b2a;
+  --c-surface:       rgba(15,33,55,0.85);
+  --c-surface-solid: #0f2135;
+  --c-border:        rgba(255,255,255,0.09);
+  --c-border-soft:   rgba(255,255,255,0.05);
+
+  --c-ink:       #e2edf7;
+  --c-ink-soft:  #a8bdd1;
+  --c-ink-muted: #6f8aa3;
+  --c-ink-faint: #3d5470;
+
+  --c-input-bg:           rgba(12,25,44,0.80);
+  --c-input-bg-focus:     rgba(12,25,44,0.96);
+  --c-input-border:       rgba(255,255,255,0.13);
+  --c-input-border-focus: var(--c-accent);
+  --c-input-text:         var(--c-ink);
+  --c-input-placeholder:  #3d5470;
+
+  --c-success-bg: rgba(46,158,107,0.14);
+  --c-warning-bg: rgba(217,122,15,0.14);
+  --c-danger-bg:  rgba(192,37,58,0.14);
+  --c-info-bg:    rgba(30,123,184,0.14);
+
+  --c-error-bg:     rgba(192,37,58,0.14);
+  --c-error-border: rgba(192,37,58,0.35);
+  --c-error-text:   #f87171;
+
+  --c-sidebar-bg:          #050f1a;
+  --c-sidebar-text:        rgba(255,255,255,0.62);
+  --c-sidebar-hover:       rgba(74,144,217,0.12);
+  --c-sidebar-active-bg:   rgba(74,144,217,0.18);
+  --c-sidebar-active-text: #ffffff;
+  --c-sidebar:             #050f1a;
+
+  --shadow-xs: 0 1px 3px  rgba(0,0,0,0.40);
+  --shadow-sm: 0 2px 8px  rgba(0,0,0,0.50);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.60);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.70);
+}
+
+[data-theme="dark"] .topbar {
+  background: rgba(13,27,42,0.94);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+/* ── Transiciones al cambiar de tema (solo después de la carga inicial) ── */
+html.theme-ready .topbar,
+html.theme-ready .sidebar,
+html.theme-ready .btn-primary,
+html.theme-ready .btn-secondary,
+html.theme-ready .btn-icon,
+html.theme-ready .btn-topbar-action {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: .25s;
+  transition-timing-function: ease;
+}
+html.theme-ready body,
+html.theme-ready .content-area {
+  transition: background-color .25s ease;
+}
+
+/* ── Panel selector de color ── */
+.color-panel {
+  position: fixed;
+  z-index: 9999;
+  background: var(--c-surface-solid);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-md);
+  min-width: 214px;
+}
+.color-panel-title {
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--c-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 12px;
+}
+.color-swatches { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.color-swatch {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .14s ease, border-color .14s ease;
+  flex-shrink: 0;
+}
+.color-swatch:hover { transform: scale(1.18); }
+.color-swatch.active { border-color: rgba(255,255,255,0.9); outline: 2px solid rgba(0,0,0,0.25); outline-offset: 2px; }
+
+/* ── Estilos de impresión (exportar PDF) ── */
+@media print {
+  .sidebar, .topbar, .asi-fichar-bar, .asi-filters-row,
+  .page-header > div:last-child, .print-hide { display: none !important; }
+  .main-content { margin-left: 0 !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .content-area { padding: 12px !important; }
+  .asi-stats { display: flex !important; gap: 16px; }
+  .table-wrapper { box-shadow: none !important; border: 1px solid #ccc; }
+}

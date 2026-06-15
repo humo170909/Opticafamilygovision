@@ -1,0 +1,87 @@
+/* ============================================================
+   OPTICA LIMA — responsive.css
+   Breakpoints:
+     • Laptop  ≤ 1366px
+     • Tablet  ≤ 1024px / ≥ 768px
+     • Mobile  < 768px
+   ============================================================ */
+
+/* ---------- Laptop (1366×768) ---------- */
+@media (max-width: 1366px) {
+  .auth-shell {
+    padding: 40px 48px;
+    gap: 24px;
+  }
+  .login-block { max-width: 400px; padding-right: 12px; }
+  .brand-block { max-width: 480px; }
+}
+
+/* ---------- Tablet (≥ 768px and ≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+  .auth-shell {
+    padding: 36px 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .login-card { padding: 32px 28px 26px; }
+  .login-title { font-size: 1.5rem; }
+  .brand-block { max-width: 100%; padding-bottom: 16px; }
+}
+
+/* ---------- Mobile (< 768px) ----------
+   Stack vertically: brand info first, login below.
+============================================================ */
+@media (max-width: 767px) {
+  .auth-shell {
+    padding: 28px 20px 36px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "brand"
+      "login";
+    gap: 28px;
+    align-items: start;
+    min-height: 100vh;
+  }
+
+  .brand-block {
+    align-self: start;
+    justify-self: start;
+    max-width: 100%;
+    padding: 16px 4px 0;
+  }
+
+  .brand-eyebrow { margin-bottom: 12px; }
+  .brand-title   { margin-bottom: 14px; }
+
+  .login-block {
+    align-self: start;
+    justify-self: center;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .login-card {
+    padding: 26px 22px 22px;
+    border-radius: 14px;
+  }
+
+  .login-title    { font-size: 1.45rem; }
+  .login-subtitle { font-size: 0.85rem; }
+
+  .field input    { padding: 11px 13px; font-size: 0.95rem; }
+  .btn-primary    { padding: 12px 18px; }
+}
+
+/* ---------- Small mobile (≤ 380px) ---------- */
+@media (max-width: 380px) {
+  .auth-shell { padding: 20px 14px 28px; }
+  .login-card { padding: 22px 18px 20px; }
+  .brand-title { font-size: 2.4rem; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .login-card { animation: none; }
+  .btn-primary, .field input { transition: none; }
+}

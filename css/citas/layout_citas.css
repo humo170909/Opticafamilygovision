@@ -1,0 +1,8 @@
+/* layout_citas.css — Grids exclusivos del módulo Citas
+   El shell (sidebar, topbar, content-area) está en css/base.css */
+
+/* Stats: 4 columnas en citas (pacientes usa 3) */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+
+/* Grid principal: calendario / lista + detalle */
+.citas-grid { display: grid; grid-template-columns: 1fr 360px; gap: 18px; align-items: start; }

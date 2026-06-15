@@ -1,5 +1,0 @@
-/* layout_pacientes.css — Grids exclusivos del módulo Pacientes
-   El shell (sidebar, topbar, content-area) está en css/base.css */
-
-/* Stats: 3 columnas en pacientes (citas usa 4) */
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }

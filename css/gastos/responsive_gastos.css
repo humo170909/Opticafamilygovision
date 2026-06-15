@@ -1,0 +1,33 @@
+/* responsive_gastos.css — Breakpoints del módulo Gastos */
+
+@media (max-width: 900px) {
+  .kpi-resumen-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid-2      { grid-template-columns: 1fr; }
+  .caja-cols        { flex-direction: column; gap: 14px; }
+  .cierre-cols      { gap: 14px; }
+}
+
+@media (max-width: 640px) {
+  .kpi-resumen-grid { grid-template-columns: 1fr; }
+
+  thead th:nth-child(4),
+  tbody td:nth-child(4) { display: none; }
+
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .toolbar     { flex-direction: column; align-items: stretch; }
+  .toolbar > * { width: 100%; }
+
+  .caja-panel { padding: 16px; }
+  .caja-panel-header { flex-direction: column; align-items: flex-start; }
+
+  .modal { max-width: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .detalle-grid  { grid-template-columns: 1fr; }
+
+  table { font-size: 0.8rem; }
+  tbody td { padding: 10px 12px; }
+  thead th  { padding: 9px 12px; }
+
+  .td-acciones { gap: 4px; }
+  .btn-icon-sm { width: 26px; height: 26px; }
+}

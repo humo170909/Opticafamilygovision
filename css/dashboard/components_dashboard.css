@@ -1,0 +1,88 @@
+/* components.css — Cards, KPIs, badges, tablas, listas */
+
+/* ── CARD ── */
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);box-shadow:var(--shadow-xs);overflow:hidden}
+.card-header{padding:16px 20px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--c-border)}
+.card-title{font-family:var(--font-d);font-weight:600;font-size:.9rem;color:var(--c-ink)}
+.card-subtitle{font-size:.72rem;color:var(--c-ink-muted);margin-top:2px}
+.card-action{font-size:.75rem;color:var(--c-accent);font-weight:500;padding:4px 8px;border-radius:var(--r-sm);transition:background .16s}
+.card-action:hover{background:var(--c-accent-bg)}
+.card-body{padding:18px 20px}
+
+/* ── KPI ── */
+.kpi-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--shadow-xs);display:flex;flex-direction:column;gap:10px;animation:fadeUp .4s ease both;transition:box-shadow .2s,transform .2s}
+.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi-card:nth-child(1){animation-delay:.04s}
+.kpi-card:nth-child(2){animation-delay:.08s}
+.kpi-card:nth-child(3){animation-delay:.12s}
+.kpi-card:nth-child(4){animation-delay:.16s}
+.kpi-top{display:flex;align-items:center;justify-content:space-between}
+.kpi-label{font-size:.75rem;font-weight:500;color:var(--c-ink-muted)}
+.kpi-icon{width:34px;height:34px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kpi-icon.a{background:var(--c-accent-bg);color:var(--c-accent)}
+.kpi-icon.s{background:var(--c-success-bg);color:var(--c-success)}
+.kpi-icon.w{background:var(--c-warning-bg);color:var(--c-warning)}
+.kpi-icon.i{background:var(--c-info-bg);color:var(--c-info)}
+.kpi-value{font-family:var(--font-d);font-weight:700;font-size:1.65rem;color:var(--c-ink);letter-spacing:-.025em;line-height:1}
+.kpi-trend{font-size:.72rem;font-weight:500;display:inline-flex;align-items:center;gap:3px}
+.kpi-trend.up{color:var(--c-success)}
+.kpi-trend.dn{color:var(--c-danger)}
+.kpi-vs{font-size:.7rem;color:var(--c-ink-faint);margin-left:3px}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:20px;font-size:.68rem;font-weight:600;white-space:nowrap}
+.badge::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor}
+.bs{background:var(--c-success-bg);color:var(--c-success)}
+.bw{background:var(--c-warning-bg);color:var(--c-warning)}
+.bd{background:var(--c-danger-bg);color:var(--c-danger)}
+.bi{background:var(--c-info-bg);color:var(--c-info)}
+.bn{background:rgba(107,130,154,0.10);color:var(--c-ink-soft)}
+
+/* ── BARRAS DE VENTAS (reemplaza Chart.js) ── */
+.bar-list{display:flex;flex-direction:column;gap:10px}
+.bar-item{display:flex;align-items:center;gap:10px}
+.bar-label{font-size:.78rem;color:var(--c-ink-soft);min-width:70px;white-space:nowrap}
+.bar-track{flex:1;height:6px;background:var(--c-accent-bg);border-radius:10px;overflow:hidden}
+.bar-fill{height:100%;background:var(--c-accent);border-radius:10px;transition:width .6s ease}
+.bar-val{font-family:var(--font-d);font-weight:600;font-size:.75rem;color:var(--c-ink-soft);min-width:60px;text-align:right;white-space:nowrap}
+
+/* ── CITAS ── */
+.apt-list{display:flex;flex-direction:column;gap:8px}
+.apt-item{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--r-md);border:1px solid var(--c-border);transition:background .16s}
+.apt-item:hover{background:var(--c-accent-bg)}
+.apt-time{font-family:var(--font-d);font-weight:600;font-size:.82rem;color:var(--c-accent-strong);min-width:40px}
+.apt-info{flex:1;min-width:0}
+.apt-name{font-weight:600;font-size:.82rem;color:var(--c-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.apt-reason{font-size:.7rem;color:var(--c-ink-muted);margin-top:1px}
+
+/* ── TABLA COMPACTA ── */
+.tbl{width:100%;border-collapse:collapse;font-size:.8rem}
+.tbl th{font-family:var(--font-d);font-weight:600;font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c-ink-muted);padding:0 10px 9px;text-align:left;border-bottom:1px solid var(--c-border)}
+.tbl td{padding:8px 10px;border-bottom:1px solid var(--c-border);color:var(--c-ink-soft)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--c-accent-bg)}
+.td-main{font-weight:600;color:var(--c-ink)}
+.td-time{font-size:.68rem;color:var(--c-ink-faint)}
+.td-money{font-family:var(--font-d);font-weight:700;color:var(--c-ink);white-space:nowrap}
+
+/* ── STOCK ── */
+.stock-list{display:flex;flex-direction:column;gap:7px}
+.stock-item{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:var(--r-sm);border:1px solid var(--c-border);transition:background .16s}
+.stock-item:hover{background:var(--c-warning-bg)}
+.stock-ico{width:28px;height:28px;border-radius:var(--r-sm);background:var(--c-warning-bg);color:var(--c-warning);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stock-info{flex:1;min-width:0}
+.stock-name{font-weight:600;font-size:.8rem;color:var(--c-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stock-detail{font-size:.7rem;color:var(--c-ink-muted);margin-top:1px}
+.stock-qty{font-family:var(--font-d);font-weight:700;font-size:.85rem;color:var(--c-warning)}
+
+/* ── TOP PRODUCTOS ── */
+.top-list{display:flex;flex-direction:column;gap:9px}
+.top-item{display:flex;align-items:center;gap:9px}
+.rank{font-family:var(--font-d);font-weight:700;font-size:.75rem;width:18px;color:var(--c-ink-faint);flex-shrink:0;text-align:right}
+.rank.g{color:#d4a017}.rank.s{color:#8a9bb0}.rank.b{color:#a0674a}
+.top-info{flex:1;min-width:0}
+.top-name{font-weight:600;font-size:.8rem;color:var(--c-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-cat{font-size:.69rem;color:var(--c-ink-muted)}
+.top-bar{flex:1;height:4px;background:var(--c-border);border-radius:10px;overflow:hidden;max-width:72px}
+.top-fill{height:100%;background:var(--c-accent);border-radius:10px}
+.top-cnt{font-family:var(--font-d);font-weight:600;font-size:.75rem;color:var(--c-ink-soft);min-width:24px;text-align:right}

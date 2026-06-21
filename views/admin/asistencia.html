@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistencia · Óptica Family GO Vision</title>
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/admin/main_admin.css" />
+  <link rel="stylesheet" href="../../css/admin/layout_admin.css" />
+  <link rel="stylesheet" href="../../css/admin/components_admin.css" />
+  <link rel="stylesheet" href="../../css/admin/responsive_admin.css" />
+  <style>
+    /* ── Fichar del admin ── */
+    .asi-fichar-bar {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      background: var(--c-surface-solid); border: 1px solid var(--c-border);
+      border-radius: var(--radius-md); padding: 14px 20px;
+      margin-bottom: 20px; box-shadow: var(--shadow-xs);
+    }
+    .asi-fichar-reloj {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+      color: var(--c-accent); letter-spacing: .04em; min-width: 90px;
+    }
+    .asi-fichar-info { flex: 1; min-width: 140px; }
+    .asi-fichar-label { font-size: .76rem; color: var(--c-ink-muted); }
+    .asi-fichar-status { font-family: var(--font-display); font-size: .88rem; font-weight: 600; color: var(--c-ink); margin-top: 2px; }
+
+    /* ── Stats día ── */
+    .asi-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 12px; margin-bottom: 20px; }
+    .asi-stat {
+      background: var(--c-surface-solid); border: 1px solid var(--c-border);
+      border-radius: var(--radius-md); padding: 14px 16px;
+      display: flex; flex-direction: column; gap: 4px; box-shadow: var(--shadow-xs);
+    }
+    .asi-stat-val { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--c-ink); line-height: 1; }
+    .asi-stat-label { font-size: .73rem; color: var(--c-ink-muted); }
+    .asi-stat.s-presente { border-left: 3px solid var(--c-success); }
+    .asi-stat.s-tardanza  { border-left: 3px solid var(--c-warning); }
+    .asi-stat.s-ausente   { border-left: 3px solid var(--c-danger); }
+    .asi-stat.s-total     { border-left: 3px solid var(--c-accent); }
+
+    /* ── Filtros ── */
+    .asi-filters {
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end;
+      background: var(--c-surface-solid); border: 1px solid var(--c-border);
+      border-radius: var(--radius-md); padding: 14px 16px;
+      margin-bottom: 14px; box-shadow: var(--shadow-xs);
+    }
+    .asi-filter-group { display: flex; flex-direction: column; gap: 4px; }
+    .asi-filter-group label { font-size: .78rem; font-family: var(--font-display); font-weight: 600; color: var(--c-ink-soft); }
+    .asi-search-wrap { position: relative; }
+    .asi-search-wrap .search-icon {
+      position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+      pointer-events: none; color: var(--c-ink-muted);
+    }
+    .asi-search-wrap input { padding-left: 32px; }
+
+    /* ── Toggle switch ── */
+    .toggle-switch {
+      position: relative; display: inline-flex; align-items: center;
+      cursor: pointer; gap: 8px; user-select: none; padding: 6px 0;
+    }
+    .toggle-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      width: 36px; height: 20px; background: var(--c-border-strong, #ccc);
+      border-radius: 10px; transition: background .2s; flex-shrink: 0; position: relative;
+    }
+    .toggle-slider::after {
+      content: ''; position: absolute; left: 2px; top: 2px;
+      width: 16px; height: 16px; background: white;
+      border-radius: 50%; transition: transform .2s;
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--c-accent); }
+    .toggle-switch input:checked + .toggle-slider::after { transform: translateX(16px); }
+    .toggle-switch span.tgl-label { font-size: .83rem; color: var(--c-ink-soft); }
+
+    /* ── Acciones tabla ── */
+    .row-actions { display: flex; gap: 4px; }
+    .btn-icon-danger { color: var(--c-ink-muted); }
+    .btn-icon-danger:hover { background: rgba(225,29,72,.10); color: var(--c-danger); }
+
+    /* ── Modal edición ── */
+    #modal-editar-registro .modal { max-width: 460px; }
+
+    /* ── Modal justificación tardanza ── */
+    .tardanza-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, .5);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      animation: fadeInOverlay .15s ease;
+    }
+    .tardanza-overlay[hidden] { display: none; }
+    @keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+    .tardanza-modal {
+      background: var(--c-surface-solid);
+      border-radius: 14px;
+      padding: 32px 28px 24px;
+      max-width: 440px; width: 100%;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, .28);
+      text-align: center;
+      animation: slideUpModal .18s ease;
+    }
+    @keyframes slideUpModal {
+      from { transform: translateY(16px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .tardanza-modal-icon   { font-size: 2.8rem; line-height: 1; margin-bottom: 14px; }
+    .tardanza-modal-title  { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--c-ink); margin: 0 0 6px; }
+    .tardanza-modal-sub    { font-family: var(--font-display); font-size: .88rem; font-weight: 600; color: var(--c-warning, #d97706); margin: 0 0 10px; }
+    .tardanza-modal-desc   { font-size: .82rem; color: var(--c-ink-muted); margin: 0 0 20px; }
+    .tardanza-modal-label  { display: block; text-align: left; font-size: .78rem; font-weight: 600; color: var(--c-ink-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .tardanza-textarea {
+      width: 100%; box-sizing: border-box;
+      border: 1.5px solid var(--c-border); border-radius: 8px;
+      padding: 10px 12px; font-size: .88rem; font-family: inherit;
+      color: var(--c-ink); background: var(--c-surface);
+      resize: vertical; min-height: 80px; transition: border-color .15s;
+    }
+    .tardanza-textarea:focus { outline: none; border-color: var(--c-accent); box-shadow: 0 0 0 3px rgba(74,144,217,.15); }
+    .tardanza-textarea.error { border-color: var(--c-danger, #dc2626); }
+    .tardanza-hint { text-align: left; font-size: .74rem; color: var(--c-ink-muted); margin: 6px 0 0; line-height: 1.4; }
+    .tardanza-field-error { display: none; text-align: left; font-size: .75rem; color: var(--c-danger, #dc2626); margin-top: 5px; min-height: 1em; }
+    .tardanza-modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px; flex-wrap: wrap; }
+
+    /* ── Print / PDF ── */
+    @media print {
+      .sidebar, .sidebar-overlay,
+      .topbar, .asi-fichar-bar, .asi-filters,
+      .page-header-actions, .btn-group-export { display: none !important; }
+      .main-content { margin-left: 0 !important; padding: 16px !important; }
+      body { background: #fff !important; }
+      .asi-stats { break-inside: avoid; }
+      .table-wrapper { box-shadow: none !important; border: none !important; }
+      thead { background: #f0f0f0 !important; }
+    }
+  </style>
+</head>
+<body class="page-hidden">
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">Óptica Family <span>GO Vision</span></div>
+      <div class="logo-sub">Sistema de Gestión</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Principal</div>
+      <a href="../dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <div class="nav-section-title">Inventario</div>
+      <a href="../inventario/categorias.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span>Tipos de Producto</span>
+      </a>
+      <a href="../inventario/productos.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><path d="M11 12h2"/></svg>
+        <span>Productos</span>
+      </a>
+      <a href="../inventario/index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>Stock</span>
+      </a>
+      <div class="nav-section-title">Ventas</div>
+      <a href="../ventas/pos.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <span>Punto de Venta</span>
+      </a>
+      <a href="../ventas/historial.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Historial</span>
+      </a>
+      <a href="../ventas/reportes.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+        <span>Reportes</span>
+      </a>
+      <a href="../ventas/gastos.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16l3-2 2 2 2-2 2 2 2-2 3 2V4a2 2 0 00-2-2z"/><line x1="16" y1="8" x2="8" y2="8"/><line x1="16" y1="12" x2="8" y2="12"/></svg>
+        <span>Gastos</span>
+      </a>
+      <div class="nav-section-title">Pacientes</div>
+      <a href="../pacientes/index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span>Pacientes</span>
+      </a>
+      <a href="../pacientes/historial.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Historial Clínico</span>
+      </a>
+      <a href="../pacientes/citas.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Citas</span>
+      </a>
+      <div class="nav-section-title">Administración</div>
+      <a href="usuarios.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span>Usuarios</span>
+      </a>
+      <a href="configuracion.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Configuración</span>
+      </a>
+      <a href="asistencia.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Asistencia</span>
+      </a>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar-initials">--</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebar-user-name">Cargando...</div>
+        <div class="user-role" id="sidebar-user-role">--</div>
+      </div>
+      <button class="btn-logout" id="btn-logout" title="Cerrar sesión">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="main-content">
+    <header class="topbar">
+      <button class="btn-topbar-action btn-menu" id="btn-menu">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <nav class="topbar-breadcrumb">
+        <a href="../dashboard.html">Dashboard</a>
+        <span class="sep">›</span><span>Administración</span>
+        <span class="sep">›</span><span class="current">Asistencia</span>
+      </nav>
+      <div class="topbar-actions">
+        <span class="topbar-date" id="topbar-date"></span>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Control de Asistencia</h1>
+          <p class="page-subtitle">Registro del personal · Hora Lima (America/Lima)</p>
+        </div>
+        <div class="page-header-actions" style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn-secondary" id="btn-marcar-ausentes" title="Crea registros 'ausente' para empleados sin fichaje hoy (disponible después de las 18:00)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/><circle cx="12" cy="12" r="10"/></svg>
+            Marcar ausentes
+          </button>
+          <div class="btn-group-export" style="display:flex;gap:6px;">
+            <button class="btn-secondary" id="btn-exportar-excel" title="Exportar a Excel">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+              Excel
+            </button>
+            <button class="btn-secondary" id="btn-exportar-pdf" title="Exportar a PDF / Imprimir">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              PDF
+            </button>
+            <button class="btn-secondary" id="btn-exportar-csv" title="Exportar CSV">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              CSV
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de fichaje del admin -->
+      <div class="asi-fichar-bar" id="asi-fichar-bar">
+        <div class="asi-fichar-reloj" id="asi-admin-reloj">--:--</div>
+        <div class="asi-fichar-info">
+          <div class="asi-fichar-label">Mi asistencia de hoy</div>
+          <div class="asi-fichar-status" id="asi-admin-status">Cargando…</div>
+        </div>
+        <div id="asi-admin-acciones"></div>
+      </div>
+
+      <!-- Stats del día -->
+      <div class="asi-stats">
+        <div class="asi-stat s-total">
+          <div class="asi-stat-val" id="stat-total">—</div>
+          <div class="asi-stat-label">Empleados activos</div>
+        </div>
+        <div class="asi-stat s-presente">
+          <div class="asi-stat-val" id="stat-presentes">—</div>
+          <div class="asi-stat-label">Presentes</div>
+        </div>
+        <div class="asi-stat s-tardanza">
+          <div class="asi-stat-val" id="stat-tardanzas">—</div>
+          <div class="asi-stat-label">Tardanzas</div>
+        </div>
+        <div class="asi-stat s-ausente">
+          <div class="asi-stat-val" id="stat-ausentes">—</div>
+          <div class="asi-stat-label">Ausentes / Sin fichar</div>
+        </div>
+      </div>
+
+      <!-- Filtros avanzados -->
+      <div class="asi-filters">
+        <div class="asi-filter-group" style="flex:1;min-width:190px;">
+          <label for="fil-buscar">Buscar empleado</label>
+          <div class="asi-search-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="fil-buscar" class="form-input" placeholder="Nombre o email…" style="min-width:180px;" />
+          </div>
+        </div>
+        <div class="asi-filter-group">
+          <label for="fil-fecha-ini">Desde</label>
+          <input type="date" id="fil-fecha-ini" class="form-input" style="max-width:160px;" />
+        </div>
+        <div class="asi-filter-group">
+          <label for="fil-fecha-fin">Hasta</label>
+          <input type="date" id="fil-fecha-fin" class="form-input" style="max-width:160px;" />
+        </div>
+        <div class="asi-filter-group">
+          <label for="fil-estado">Estado</label>
+          <select id="fil-estado" class="form-select" style="max-width:160px;">
+            <option value="">Todos</option>
+            <option value="presente">Presente</option>
+            <option value="tardanza">Tardanza</option>
+            <option value="ausente">Ausente</option>
+            <option value="pendiente">Sin registro</option>
+          </select>
+        </div>
+        <div class="asi-filter-group">
+          <label for="fil-tardanzas">Solo tardanzas</label>
+          <label class="toggle-switch" for="fil-tardanzas">
+            <input type="checkbox" id="fil-tardanzas" />
+            <span class="toggle-slider"></span>
+            <span class="tgl-label" id="tgl-tardanzas-label">No</span>
+          </label>
+        </div>
+        <div class="asi-filter-group" style="justify-content:flex-end;">
+          <label>&nbsp;</label>
+          <button class="btn-primary" id="btn-filtrar">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtrar
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabla historial -->
+      <div class="table-wrapper" id="tabla-wrapper">
+        <table id="tabla-asistencia-el">
+          <thead>
+            <tr>
+              <th>Empleado</th>
+              <th>Fecha</th>
+              <th>Entrada</th>
+              <th>Salida</th>
+              <th>Estado</th>
+              <th>Min. tarde</th>
+              <th>Hrs trabajadas</th>
+              <th>Justificación</th>
+              <th style="width:80px;"></th>
+            </tr>
+          </thead>
+          <tbody id="tabla-asistencia">
+            <tr><td colspan="9" style="text-align:center;padding:20px;color:var(--c-ink-muted);">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Modal editar registro -->
+<div class="modal-overlay" id="modal-editar-registro" role="dialog" aria-modal="true">
+  <div class="modal" style="max-width:460px;">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">Editar registro</h2>
+        <p class="modal-subtitle" id="modal-edit-subtitulo">Empleado · Fecha</p>
+      </div>
+      <button class="modal-close" id="btn-close-modal-edit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="edit-error" class="error-message" hidden style="margin-bottom:4px;"></div>
+      <input type="hidden" id="edit-registro-id" />
+      <div class="config-row">
+        <div class="form-group">
+          <label class="form-label" for="edit-estado">Estado</label>
+          <select id="edit-estado" class="form-select">
+            <option value="presente">Presente</option>
+            <option value="tardanza">Tardanza</option>
+            <option value="ausente">Ausente</option>
+            <option value="pendiente">Pendiente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="edit-minutos-tarde">Min. de tardanza</label>
+          <input type="number" id="edit-minutos-tarde" class="form-input" min="0" value="0" />
+        </div>
+      </div>
+      <div class="config-row">
+        <div class="form-group">
+          <label class="form-label" for="edit-hora-entrada">Hora entrada</label>
+          <input type="time" id="edit-hora-entrada" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="edit-hora-salida">Hora salida</label>
+          <input type="time" id="edit-hora-salida" class="form-input" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="edit-observaciones">Justificación / Observaciones</label>
+        <textarea id="edit-observaciones" class="form-textarea" rows="3" maxlength="500" placeholder="Justificación del colaborador u observaciones del administrador…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="btn-edit-cancelar">Cancelar</button>
+      <button class="btn-primary"   id="btn-edit-guardar">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: justificación de tardanza (admin) ── -->
+<div id="modal-tardanza" class="tardanza-overlay" hidden>
+  <div class="tardanza-modal" role="dialog" aria-modal="true" aria-labelledby="modal-tardanza-title-adm">
+    <div class="tardanza-modal-icon">⏰</div>
+    <h2 class="tardanza-modal-title" id="modal-tardanza-title-adm">Justificación de Tardanza</h2>
+    <p class="tardanza-modal-sub" id="tardanza-minutos-text"></p>
+    <p class="tardanza-modal-desc">Se detectó una tardanza en tu ingreso.<br>Por favor, indica el motivo antes de continuar.</p>
+    <label class="tardanza-modal-label" for="input-justificacion">
+      Motivo de la tardanza <span style="color:var(--c-danger,#dc2626);">*</span>
+    </label>
+    <textarea
+      id="input-justificacion"
+      class="tardanza-textarea"
+      rows="3"
+      maxlength="300"
+      placeholder="Describe el motivo de tu tardanza…"
+    ></textarea>
+    <p class="tardanza-hint">Ej: Tráfico vehicular · Problema familiar · Cita médica · Problema de transporte · Otro</p>
+    <p id="justif-error" class="tardanza-field-error"></p>
+    <div class="tardanza-modal-footer">
+      <button class="btn-secondary" id="btn-tardanza-cancelar" type="button">Cancelar</button>
+      <button class="btn-primary"   id="btn-tardanza-confirmar" type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Guardar Justificación
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: confirmación tardanza registrada (admin) ── -->
+<div id="modal-confirmacion-tardanza" class="tardanza-overlay" hidden>
+  <div class="tardanza-modal" role="alertdialog" aria-modal="true">
+    <div class="tardanza-modal-icon">✅</div>
+    <h2 class="tardanza-modal-title">Justificación Registrada</h2>
+    <p class="tardanza-modal-sub" style="color:var(--c-success,#16a34a);">Tardanza registrada correctamente</p>
+    <p class="tardanza-modal-desc">Su tardanza ha sido registrada correctamente.<br>La información fue enviada como notificación.</p>
+    <div class="tardanza-modal-footer" style="justify-content:center;margin-top:24px;">
+      <button class="btn-primary" id="btn-confirmacion-aceptar" type="button">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../../js/modules/admin/asistencia.js"></script>
+</body>
+</html>

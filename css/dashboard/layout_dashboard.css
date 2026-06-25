@@ -1,8 +1,0 @@
-/* layout_dashboard.css — Grids exclusivos del dashboard
-   El shell (sidebar, topbar, content-area) está en css/base.css */
-
-.kpi-grid        { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
-.two-col-grid    { display: grid; grid-template-columns: 1.55fr 1fr; gap: 16px; margin-bottom: 16px; }
-/* mid-grid — fila media: gráfico (más ancho) + citas + métodos de pago */
-.mid-grid        { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-.three-col-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }

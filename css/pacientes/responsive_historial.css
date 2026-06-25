@@ -1,0 +1,23 @@
+/* responsive_historial.css — Breakpoints del módulo Historial Clínico
+   Sidebar / topbar / content-area están en css/base.css */
+
+@media (max-width: 1024px) {
+  .hist-grid { grid-template-columns: 260px 1fr; }
+}
+@media (max-width: 860px) {
+  .hist-grid  { grid-template-columns: 1fr; }
+  .panel-izq  { position: static; }
+  .pac-list   { max-height: 200px; }
+}
+@media (max-width: 768px) {
+  .grad-grid   { grid-template-columns: 1fr; }
+  .form-row    { grid-template-columns: 1fr; }
+  .ficha-datos { grid-template-columns: 1fr; }
+  .hist-tabs   { overflow-x: auto; scrollbar-width: none; }
+  .hist-tabs::-webkit-scrollbar { display: none; }
+}
+@media (max-width: 480px) {
+  .modal        { max-width: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; margin: 0; }
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .ficha-header { flex-direction: column; align-items: flex-start; }
+}

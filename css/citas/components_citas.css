@@ -1,0 +1,122 @@
+/* components_citas.css — Componentes del módulo Citas */
+
+/* ── STAT CARD ── */
+.stat-card { background: var(--ci-surface); border: 1px solid var(--ci-border); border-radius: var(--ci-r-lg); padding: 16px 18px; box-shadow: var(--ci-shadow-xs); display: flex; align-items: center; gap: 12px; animation: ci-fadeUp .4s ease both; transition: box-shadow .2s, transform .2s; }
+.stat-card:hover { box-shadow: var(--ci-shadow-md); transform: translateY(-2px); }
+.stat-card:nth-child(1) { animation-delay: .04s; }
+.stat-card:nth-child(2) { animation-delay: .08s; }
+.stat-card:nth-child(3) { animation-delay: .12s; }
+.stat-card:nth-child(4) { animation-delay: .16s; }
+.stat-ico { width: 38px; height: 38px; border-radius: var(--ci-r-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.stat-ico.a { background: var(--ci-accent-bg);  color: var(--ci-accent); }
+.stat-ico.s { background: var(--ci-success-bg); color: var(--ci-success); }
+.stat-ico.w { background: var(--ci-warning-bg); color: var(--ci-warning); }
+.stat-ico.i { background: var(--ci-info-bg);    color: var(--ci-info); }
+.stat-body { flex: 1; min-width: 0; }
+.stat-value { font-family: var(--ci-font-d); font-weight: 700; font-size: 1.5rem; color: var(--ci-ink); letter-spacing: -.025em; line-height: 1; }
+.stat-label { font-size: .73rem; color: var(--ci-ink-muted); margin-top: 3px; }
+
+/* ── CARD BASE ── */
+.card { background: var(--ci-surface); border: 1px solid var(--ci-border); border-radius: var(--ci-r-lg); box-shadow: var(--ci-shadow-xs); overflow: hidden; }
+.card-header { padding: 16px 20px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--ci-border); }
+.card-title { font-family: var(--ci-font-d); font-weight: 600; font-size: .9rem; color: var(--ci-ink); }
+.card-subtitle { font-size: .72rem; color: var(--ci-ink-muted); margin-top: 2px; }
+.card-action { font-size: .75rem; color: var(--ci-accent); font-weight: 500; padding: 4px 8px; border-radius: var(--ci-r-sm); transition: background .16s; }
+.card-action:hover { background: var(--ci-accent-bg); }
+.card-body { padding: 18px 20px; }
+
+/* ── NAVEGACIÓN DEL CALENDARIO ── */
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.cal-mes { font-family: var(--ci-font-d); font-weight: 700; font-size: 1rem; color: var(--ci-ink); }
+.cal-nav-btn { width: 30px; height: 30px; border-radius: var(--ci-r-sm); border: 1px solid var(--ci-border); background: var(--ci-surface); display: flex; align-items: center; justify-content: center; color: var(--ci-ink-muted); transition: all .14s; }
+.cal-nav-btn:hover { background: var(--ci-accent-bg); border-color: var(--ci-accent-soft); color: var(--ci-accent-strong); }
+
+/* ── GRILLA DEL CALENDARIO ── */
+.cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+.cal-dow { font-family: var(--ci-font-d); font-size: .65rem; font-weight: 700; text-align: center; color: var(--ci-ink-faint); text-transform: uppercase; padding-bottom: 8px; letter-spacing: .06em; }
+.cal-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: var(--ci-r-sm); font-family: var(--ci-font-d); font-size: .82rem; font-weight: 500; color: var(--ci-ink-soft); cursor: pointer; position: relative; transition: background .14s, color .14s; gap: 2px; }
+.cal-day:hover { background: var(--ci-accent-bg); color: var(--ci-accent-strong); }
+.cal-day.today { background: var(--ci-accent); color: #fff; font-weight: 700; }
+.cal-day.today:hover { background: var(--ci-accent-strong); }
+.cal-day.selected { background: var(--ci-accent-bg); color: var(--ci-accent-strong); border: 1.5px solid var(--ci-accent-soft); }
+.cal-day.otro-mes { color: var(--ci-ink-faint); }
+.cal-day.otro-mes:hover { color: var(--ci-ink-muted); }
+/* Punto indicador de citas en ese día */
+.cal-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ci-accent); flex-shrink: 0; }
+.cal-day.today .cal-dot { background: rgba(255,255,255,0.7); }
+
+/* ── LISTA DE CITAS DEL DÍA ── */
+.cita-list { display: flex; flex-direction: column; gap: 8px; }
+.cita-item { display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: var(--ci-r-md); border: 1px solid var(--ci-border); transition: background .14s, border-color .14s; cursor: pointer; }
+.cita-item:hover { background: var(--ci-accent-bg); border-color: var(--ci-accent-soft); }
+.cita-item.selected { background: var(--ci-accent-bg); border-color: var(--ci-accent); }
+
+/* Franja de hora a la izquierda */
+.cita-hora { font-family: var(--ci-font-d); font-weight: 700; font-size: .82rem; color: var(--ci-accent-strong); min-width: 42px; text-align: center; }
+/* Línea vertical de color según estado */
+.cita-barra { width: 3px; height: 36px; border-radius: 10px; flex-shrink: 0; }
+.cita-barra.confirmada { background: var(--ci-success); }
+.cita-barra.pendiente  { background: var(--ci-warning); }
+.cita-barra.cancelada  { background: var(--ci-danger); }
+.cita-barra.completada { background: var(--ci-info); }
+
+.cita-info { flex: 1; min-width: 0; }
+.cita-paciente { font-weight: 600; font-size: .84rem; color: var(--ci-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cita-motivo { font-size: .72rem; color: var(--ci-ink-muted); margin-top: 1px; }
+
+.cita-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.btn-row { width: 28px; height: 28px; border-radius: var(--ci-r-sm); display: flex; align-items: center; justify-content: center; color: var(--ci-ink-muted); border: 1px solid transparent; transition: all .14s; }
+.btn-row:hover { background: var(--ci-accent-bg); border-color: var(--ci-accent-soft); color: var(--ci-accent-strong); }
+.btn-row.danger:hover { background: var(--ci-danger-bg); border-color: rgba(192,37,58,0.2); color: var(--ci-danger); }
+.btn-row.success:hover { background: var(--ci-success-bg); border-color: rgba(46,158,107,0.2); color: var(--ci-success); }
+
+/* ── DETALLE DE CITA (panel derecho) ── */
+.detalle-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; gap: 10px; color: var(--ci-ink-faint); text-align: center; }
+.detalle-empty svg { opacity: .25; }
+.detalle-empty p { font-size: .84rem; }
+
+.detalle-paciente { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--ci-border); margin-bottom: 16px; }
+.det-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--ci-accent-bg); border: 2px solid var(--ci-accent-soft); display: flex; align-items: center; justify-content: center; font-family: var(--ci-font-d); font-weight: 700; font-size: 1rem; color: var(--ci-accent); flex-shrink: 0; }
+.det-nombre { font-family: var(--ci-font-d); font-weight: 700; font-size: 1rem; color: var(--ci-ink); }
+.det-meta { font-size: .74rem; color: var(--ci-ink-muted); margin-top: 3px; }
+
+.det-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.det-item { display: flex; flex-direction: column; gap: 2px; }
+.det-label { font-size: .67rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ci-ink-faint); }
+.det-valor { font-size: .82rem; color: var(--ci-ink-soft); font-weight: 500; }
+
+.det-nota { background: var(--ci-bg); border: 1px solid var(--ci-border); border-radius: var(--ci-r-sm); padding: 10px 12px; font-size: .8rem; color: var(--ci-ink-soft); line-height: 1.55; margin-bottom: 16px; }
+.det-nota-label { font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ci-ink-faint); margin-bottom: 5px; }
+
+.det-acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ── BADGES ── */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 20px; font-size: .68rem; font-weight: 600; white-space: nowrap; }
+.badge::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+.bs { background: var(--ci-success-bg); color: var(--ci-success); }
+.bw { background: var(--ci-warning-bg); color: var(--ci-warning); }
+.bd { background: var(--ci-danger-bg);  color: var(--ci-danger); }
+.bi { background: var(--ci-info-bg);    color: var(--ci-info); }
+.bn { background: rgba(107,130,154,0.10); color: var(--ci-ink-soft); }
+
+/* ── MODAL NUEVA CITA ── */
+.modal-overlay { position: fixed; inset: 0; background: rgba(15,42,68,0.45); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .2s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--ci-surface); border-radius: var(--ci-r-lg); box-shadow: var(--ci-shadow-md); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; transform: translateY(14px); transition: transform .22s ease; }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-header { padding: 20px 22px 16px; border-bottom: 1px solid var(--ci-border); display: flex; align-items: center; justify-content: space-between; }
+.modal-title { font-family: var(--ci-font-d); font-weight: 700; font-size: 1.05rem; color: var(--ci-ink); }
+.btn-close { width: 28px; height: 28px; border-radius: var(--ci-r-sm); display: flex; align-items: center; justify-content: center; color: var(--ci-ink-muted); transition: background .14s, color .14s; }
+.btn-close:hover { background: var(--ci-danger-bg); color: var(--ci-danger); }
+.modal-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 13px; }
+.modal-footer { padding: 14px 22px 20px; border-top: 1px solid var(--ci-border); display: flex; justify-content: flex-end; gap: 8px; }
+
+/* Formulario */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-family: var(--ci-font-d); font-size: .74rem; font-weight: 600; color: var(--ci-ink-soft); }
+.form-input, .form-select, .form-textarea { padding: 8px 11px; border: 1px solid var(--ci-border); border-radius: var(--ci-r-sm); background: var(--ci-surface); font-family: var(--ci-font-b); font-size: .84rem; color: var(--ci-ink); outline: none; transition: border-color .16s, box-shadow .16s; width: 100%; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--ci-accent); box-shadow: 0 0 0 3px var(--ci-accent-bg); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--ci-ink-faint); }
+.form-textarea { resize: vertical; min-height: 68px; }
